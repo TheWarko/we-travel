@@ -20,14 +20,14 @@ const updateData = (newData: Array<any>): void => {
 </script>
 
 <template>
-  <div class="containero">
+  <div class="themeTravel-container">
     <Header :title="'Travels'" :back="'/'" />
     <div class="content">
-      <div class="button-container">
+      <div class="actions">
         <Button @click="goToEditPage">NEW TRAVEL</Button>
       </div>
       <Datalist :data="travels" @update:data="updateData" />
-      <div class="button-container">
+      <div class="actions">
         <Button @click="goToEditPage">NEW TRAVEL</Button>
       </div>
     </div>
@@ -35,15 +35,12 @@ const updateData = (newData: Array<any>): void => {
 </template>
 
 <style scoped>
-.containero {
-  @apply min-h-screen bg-themeTravel-background text-themeTravel-text flex flex-col;
-}
 
 .content {
   @apply flex-1 p-8;
 }
 
-.button-container {
+.actions {
   @apply m-4 flex justify-end;
 }
 </style>

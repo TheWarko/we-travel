@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import Header from '@/components/Header/Header.vue'
 import Wizard from '@/components/Wizard/Wizard.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
-import Button from '@/components/Buttons/Button.vue'
 
 const router = useRouter()
 const searchQuery = ref('')
@@ -33,7 +32,7 @@ const selectTravel = (travel) => {
       <h2 class="text-2xl font-bold mb-4">Step 1: Choose the travel you want to book</h2>
       <form>
         <FormGroup :for="'travel'" :label="'Select Travel'">
-          <input type="text" id="travel" class="input" v-model="searchQuery" />
+          <input type="text" id="travel" class="we-input" v-model="searchQuery" />
         </FormGroup>
         <ul class="results">
           <li v-for="travel in filteredTravels" :key="travel.id" @click="selectTravel(travel)">
@@ -63,7 +62,4 @@ const selectTravel = (travel) => {
   @apply cursor-pointer p-2 mb-2 hover:bg-themeBooking-primary hover:text-themeBooking-background;
 }
 
-.input {
-  @apply w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-themeBooking-accent;
-}
 </style>

@@ -1,0 +1,22 @@
+.we-container{
+    @apply min-h-screen flex flex-col;
+}
+
+.we-form {
+    @apply bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl;  
+}
+
+.we-input {
+    @apply w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+
+/* Themes */
+
+.themeTravel-container{
+    @apply min-h-screen bg-themeTravel-background text-themeTravel-text flex flex-col;
+}
+
+.themeBooking-container{
+    @apply min-h-screen bg-themeBooking-background text-themeBooking-text flex flex-col;
+}

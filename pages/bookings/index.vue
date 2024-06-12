@@ -21,14 +21,14 @@ const updateData = (newData: Array<any>): void => {
 </script>
 
 <template>
-  <div class="containero">
+  <div class="themeBooking-container">
     <Header :title="'Bookings'" :back="'/'" :theme="'themeBooking'" />
     <div class="content">
-      <div class="button-container">
+      <div class="actions">
         <Button @click="goToWizard" :theme="'themeBooking'">NEW BOOKING</Button>
       </div>
       <Datalist :data="bookings" @update:data="updateData" />
-      <div class="button-container">
+      <div class="actions">
         <Button @click="goToWizard" :theme="'themeBooking'">NEW BOOKING</Button>
       </div>
     </div>
@@ -36,15 +36,12 @@ const updateData = (newData: Array<any>): void => {
 </template>
 
 <style scoped>
-  .containero {
-    @apply min-h-screen bg-themeBooking-background text-themeBooking-text flex flex-col;
-  }
 
 .content {
   @apply flex-1 p-8;
 }
 
-.button-container {
+.actions {
   @apply m-4 flex justify-end;
 }
 </style>
