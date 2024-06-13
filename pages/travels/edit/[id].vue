@@ -114,7 +114,7 @@ const checkScore = () => {
 
 <style scoped>
 .containero {
-  @apply min-h-screen bg-themeTravel-background text-themeTravel-text flex flex-col;
+  @apply min-h-screen bg-themeTravel-background text-themeTravel-text;
 }
 
 .content {

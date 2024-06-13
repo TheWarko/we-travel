@@ -1,10 +1,10 @@
 <template>
   <div class="filters">
     <div class="grid md:grid-cols-4 gap-4">
-      <FormGroup :for="'departure'" :label="'Departure Date (from)'">
+      <FormGroup :for="'departure'" :label="'Departure Date'">
         <input type="date" id="departure" class="input" v-model="filters.departure" @input="updateFilters" />
       </FormGroup>
-      <FormGroup :for="'return'" :label="'Return Date (from)'">
+      <FormGroup :for="'return'" :label="'Return Date'">
         <input type="date" id="return" class="input" v-model="filters.return" @input="updateFilters" />
       </FormGroup>
       <FormGroup :for="'price'" :label="'Price'">

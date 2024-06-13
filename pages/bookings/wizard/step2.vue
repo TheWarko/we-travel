@@ -6,7 +6,7 @@ import Header from '@/components/Header/Header.vue'
 import Wizard from '@/components/Wizard/Wizard.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
 import Button from '@/components/Buttons/Button.vue'
-import { validateForm } from '@/helpers/form'
+import { validateForm, isValidEmail, isValidPhone, isValidAge } from '@/helpers/form'
 
 const router = useRouter()
 
@@ -14,7 +14,7 @@ const user = ref({
   name: '',
   email: '',
   phone: '',
-  age: 0,
+  age: '',
   gender: ''
 })
 
@@ -26,17 +26,62 @@ const errors = ref({
   gender: ''
 })
 
+const onChangeEmail = () => {
+  if (!isValidEmail(user.value.email)) {
+    errors.value.email = `The field email should be valid`
+    return false
+  }else{
+    errors.value.email = ''
+    return true
+  }
+}
+
+const onChangePhone = () => {
+  if(!isValidPhone(user.value.phone)){
+    errors.value.phone = `The field phone should be valid`
+    return false
+  }else{
+    errors.value.phone = ''
+    return true
+  }
+}
+
+const onChangeAge = () => {
+  if(!isValidAge(user.value.age)){
+    user.value.age = ''
+    errors.value.age = 'The field age should be valid'
+    return false
+  }else{
+    errors.value.age = ''
+    return true
+  }
+}
+
+const validateThisForm = (datas, errors) => {
+  let valid = validateForm(datas, errors)
+ 
+  if(!onChangeEmail()){
+    valid = false
+  }
+
+  if(!onChangePhone()){
+    valid = false
+  }
+
+  if (Number(datas.value.age) <= 0) {
+    errors.value.age = `The field age should be valid`
+    valid = false
+  }
+
+  return valid
+}
+
 const submitForm = () => {
-  if (validateForm(user, errors)) {
+  if (validateThisForm(user, errors)) {
     router.push('/bookings/wizard/step3')
   }
 }
 
-const checkAge = () => {
-  if (user.value.age > 150) {
-      user.value.age = 0
-  }
-  }
 </script>
 
 <template>
@@ -50,13 +95,13 @@ const checkAge = () => {
             <input v-model="user.name" type="text" id="name" class="we-input" />
           </FormGroup>
           <FormGroup :for="'email'" :label="'Email'" :error="errors.email">
-            <input v-model="user.email" type="email" id="email" class="we-input" />
+            <input v-model="user.email" type="text" id="email" @change="onChangeEmail" class="we-input" />
           </FormGroup>
           <FormGroup :for="'phone'" :label="'Phone'" :error="errors.phone">
-            <input v-model="user.phone" type="tel" id="phone" class="we-input" />
+            <input v-model="user.phone" type="tel" id="phone" @change="onChangePhone" class="we-input" />
           </FormGroup>
           <FormGroup :for="'age'" :label="'Age'" :error="errors.age">
-            <input v-model.number="user.age" type="number" id="age" @change="checkAge" class="we-input" max="150" />
+            <input v-model.number="user.age" type="text" id="age" @change="onChangeAge" class="we-input" />
           </FormGroup>
           <FormGroup :for="'gender'" :label="'Gender'" :error="errors.gender">
             <select v-model="user.gender" id="gender" class="we-input">
@@ -76,7 +121,7 @@ const checkAge = () => {
   
   <style scoped>
   .containero {
-    @apply min-h-screen bg-themeBooking-background text-themeBooking-text flex flex-col;
+    @apply min-h-screen bg-themeBooking-background text-themeBooking-text;
   }
   
   .content {
