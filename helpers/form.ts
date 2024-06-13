@@ -19,7 +19,7 @@ export const isValidEmail = (email: string) : boolean => {
 
 export const isValidPhone = (phone: string) : boolean => {
   const regexPhone = /^[0-9+]*$/g
-  return regexPhone.test(phone)
+  return phone !== '' && regexPhone.test(phone)
 }
 
 export const isValidAge = (ageString: string): boolean => {

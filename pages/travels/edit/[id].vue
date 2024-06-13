@@ -51,13 +51,13 @@ onMounted(() => {
 const saveTravel = async () => {
   if (validateForm(travel, errors)) {
     try {
-      // const result = await $fetch('/api/travels', {
+      // const result = await $fetch('/api/travels/new', {
       //   method: 'POST',
       //   body: {
       //     ...travel.value
       //   }
       // })
-      alert('Saved!')
+      console.log(travel.value)
       router.push('/travels')
     } catch (error) {
       console.error('Error adding travel:', error)
@@ -79,7 +79,7 @@ const checkScore = () => {
 <template>
   <div class="themeTravel-container">
     <Header :title="'Travels'" :back="'/travels'" />
-    <div class="content">
+    <div class="we-content">
       <h1 class="title">{{ isEditMode ? 'Edit Travel' : 'Add New Travel' }}</h1>
       <form @submit.prevent="saveTravel" class="we-form">
         <FormGroup :for="'name'" :label="'Travel Name'" :error="errors.name">
@@ -115,10 +115,6 @@ const checkScore = () => {
 <style scoped>
 .containero {
   @apply min-h-screen bg-themeTravel-background text-themeTravel-text;
-}
-
-.content {
-  @apply flex flex-col items-center p-8;
 }
 
 .title {

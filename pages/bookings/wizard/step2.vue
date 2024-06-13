@@ -1,14 +1,17 @@
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import Header from '@/components/Header/Header.vue'
 import Wizard from '@/components/Wizard/Wizard.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
 import Button from '@/components/Buttons/Button.vue'
 import { validateForm, isValidEmail, isValidPhone, isValidAge } from '@/helpers/form'
 
-const router = useRouter()
+const emit = defineEmits(['update:data','update:step'])
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true
+  }
+})
 
 const user = ref({
   name: '',
@@ -78,18 +81,18 @@ const validateThisForm = (datas, errors) => {
 
 const submitForm = () => {
   if (validateThisForm(user, errors)) {
-    router.push('/bookings/wizard/step3')
+    const updatedData = {...props.data, user: user.value}
+    emit('update:data', updatedData)
+    emit('update:step', 3)
   }
 }
 
 </script>
 
 <template>
-    <div class="containero">
-      <Header :title="'User Registration'" :back="'/bookings/wizard'" :theme="'themeBooking'" />
       <Wizard :steps="3" :currentStep="2" :theme="'themeBooking'" />
-      <div class="content">
-        <p class="title">Add User datas</p>
+      <div class="we-content">
+        <p class="title">Step 2: Add User datas</p>
         <form @submit.prevent="submitForm" class="we-form">
           <FormGroup :for="'name'" :label="'Name'" :error="errors.name">
             <input v-model="user.name" type="text" id="name" class="we-input" />
@@ -116,20 +119,11 @@ const submitForm = () => {
           </div>
         </form>
       </div>
-    </div>
   </template>
   
   <style scoped>
-  .containero {
-    @apply min-h-screen bg-themeBooking-background text-themeBooking-text;
+  .title {
+    @apply text-2xl font-bold mb-4 text-themeBooking-text;
   }
-  
-  .content {
-    @apply flex flex-col items-center p-8;
-    }
-
-    .title {
-    @apply text-3xl font-bold mb-8 text-themeBooking-text;
-    }
   </style>
   

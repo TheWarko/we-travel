@@ -2,6 +2,10 @@
     @apply min-h-screen flex flex-col;
 }
 
+.we-content {
+    @apply flex flex-col items-center p-8;
+}
+
 .we-form {
     @apply bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl;  
 }
@@ -14,9 +18,9 @@
 /* Themes */
 
 .themeTravel-container{
-    @apply min-h-screen bg-themeTravel-background text-themeTravel-text flex flex-col;
+    @apply min-h-screen bg-themeTravel-background text-themeTravel-text;
 }
 
 .themeBooking-container{
-    @apply min-h-screen bg-themeBooking-background text-themeBooking-text flex flex-col;
+    @apply min-h-screen bg-themeBooking-background text-themeBooking-text;
 }

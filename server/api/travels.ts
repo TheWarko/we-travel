@@ -3,7 +3,7 @@
     return [
         {
             id: 1,
-            picture: 'https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSBAQChgx8NJtwKwQrVySnLqOb8A4Cax8KZi5x-qftOWJbhbC1Yvc3aAfCS9xzRJzgBsbAYK8TGWc0ndF5y9c0',
+            picture: 'https://worldinparis.com/wp-content/uploads/2019/10/Travel-to-Paris.jpg',
             name: 'Paris',
             departure: '2024-07-01',
             return: '2025-01-10',
@@ -13,7 +13,7 @@
         },
         {
             id: 2,
-            picture: 'https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSBAQChgx8NJtwKwQrVySnLqOb8A4Cax8KZi5x-qftOWJbhbC1Yvc3aAfCS9xzRJzgBsbAYK8TGWc0ndF5y9c0',
+            picture: 'https://static.independent.co.uk/2023/05/10/10/newFile-5.jpg',
             name: 'London',
             departure: '2024-01-01',
             return: '2024-10-10',
@@ -33,7 +33,7 @@
         },
         {
             id: 4,
-            picture: 'https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSBAQChgx8NJtwKwQrVySnLqOb8A4Cax8KZi5x-qftOWJbhbC1Yvc3aAfCS9xzRJzgBsbAYK8TGWc0ndF5y9c0',
+            picture: 'https://worldinparis.com/wp-content/uploads/2019/10/Travel-to-Paris.jpg',
             name: 'Paris',
             departure: '2025-01-01',
             return: '2025-01-10',
@@ -43,7 +43,7 @@
         },
         {
             id: 5,
-            picture: 'https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSBAQChgx8NJtwKwQrVySnLqOb8A4Cax8KZi5x-qftOWJbhbC1Yvc3aAfCS9xzRJzgBsbAYK8TGWc0ndF5y9c0',
+            picture: 'https://static.independent.co.uk/2023/05/10/10/newFile-5.jpg',
             name: 'London',
             departure: '2026-01-01',
             return: '2026-01-10',

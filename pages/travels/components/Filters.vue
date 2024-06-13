@@ -10,10 +10,10 @@
       <FormGroup :for="'price'" :label="'Price'">
         <select id="price" class="input" v-model="filters.price" @change="updateFilters">
           <option value="">Select Price Range</option>
-          <option value="0-1000">0 - 1000</option>
-          <option value="1000-2000">1000 - 2000</option>
-          <option value="2000-3000">2000 - 3000</option>
-          <option value="3000+">3000+</option>
+          <option value="0-1000">0 - 1.000</option>
+          <option value="1000-2000">1.000 - 2.000</option>
+          <option value="2000-3000">2.000 - 3.000</option>
+          <option value="3000+">3.000+</option>
         </select>
       </FormGroup>
       <FormGroup :for="'score'" :label="'Minimum Score'">

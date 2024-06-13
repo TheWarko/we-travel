@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import Button from '@/components/Buttons/Button.vue'
 import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
 import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
 import { useRouter } from 'vue-router'
-import { PAYMENT_METHOD_TYPE_1, PAYMENT_METHOD_TYPE_2, PAYMENT_METHOD_TYPE_3 } from '~/costants'
+import { PAYMENT_METHOD_TYPE_1, PAYMENT_METHOD_TYPE_2, PAYMENT_METHOD_TYPE_3 } from '@/constants'
 
 const router = useRouter()
 

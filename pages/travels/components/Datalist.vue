@@ -100,7 +100,7 @@ const updateFilters = (newFilters: typeof filters.value) => {
           <div class="data-cell col-span-1">{{ item.departure }}</div>
           <div class="data-cell col-span-1">{{ item.return }}</div>
           <div class="data-cell col-span-3">{{ item.description }}</div>
-          <div class="data-cell col-span-1">{{ item.price }}</div>
+          <div class="data-cell col-span-1">{{ item.price.toLocaleString() }}</div>
           <div class="data-cell col-span-1">{{ item.score }}</div>
           <div class="data-cell col-span-1 actions">
             <Button @click="goToEditPage(item.id)" class="mb-2">EDIT</Button>
