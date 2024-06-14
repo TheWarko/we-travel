@@ -1,9 +1,28 @@
 # WeTravel
-
 Travels and bookings management system consisting of 2 pages, one to manage travel and the other to manage booking.
-Enjoy to learn with Vue 3 :)
 
-## Setup
+Or just a way to learn Vue 3 :)
+
+![](https://github.com/TheWarko/we-travel/blob/main/public/preview.gif)
+
+## Technologies
+* Vue 3
+* Nuxt 3
+* Typescript
+* TailwindCSS
+
+## API
+Mocked data with Nuxt.
+
+## Demo
+Here the [demo link](https://main--we-travel-booking.netlify.app/) on Netlify.
+
+<br />
+<br />
+
+
+## COMMANDS
+### Setup
 
 Make sure to install the dependencies:
 
@@ -21,7 +40,7 @@ yarn install
 bun install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on `http://localhost:3000`:
 
