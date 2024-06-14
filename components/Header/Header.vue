@@ -4,17 +4,17 @@ import { useRouter } from 'vue-router'
 const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   back: {
     type: String,
-    required: false
+    required: false,
   },
   theme: {
     type: String,
     required: false,
-    default: 'themeTravel'
-  }
+    default: 'themeTravel',
+  },
 })
 
 const router = useRouter()

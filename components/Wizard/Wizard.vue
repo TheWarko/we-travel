@@ -4,20 +4,22 @@ import { computed } from 'vue'
 const props = defineProps({
   steps: {
     type: Number,
-    required: true
+    required: true,
   },
   currentStep: {
     type: Number,
-    required: true
+    required: true,
   },
   theme: {
     type: String,
     required: false,
-    default: 'themeTravel'
-  }
+    default: 'themeTravel',
+  },
 })
 
-const stepArray = computed(() => Array.from({ length: props.steps }, (_, i) => i + 1))
+const stepArray = computed(() =>
+  Array.from({ length: props.steps }, (_, i) => i + 1),
+)
 </script>
 
 <template>

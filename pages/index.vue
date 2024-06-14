@@ -2,19 +2,15 @@
   <div class="containero">
     <h1 class="title">Welcome to Travels and Bookings management system</h1>
     <div class="links">
-      <nuxt-link to="/travels" class="box">
-        Travels Manager
-      </nuxt-link>
-      <nuxt-link to="/bookings" class="box">
-        Bookings Manager
-      </nuxt-link>
+      <nuxt-link to="/travels" class="box"> Travels Manager </nuxt-link>
+      <nuxt-link to="/bookings" class="box"> Bookings Manager </nuxt-link>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 export default defineComponent({
-  name: 'HomePage'
+  name: 'HomePage',
 })
 </script>
 

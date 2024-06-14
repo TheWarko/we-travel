@@ -1,5 +1,4 @@
-  
-  <script setup lang="ts">
+<script setup lang="ts">
 import Header from '@/components/Header/Header.vue'
 import Datalist from './components/Datalist.vue'
 import Button from '@/components/Buttons/Button.vue'
@@ -36,7 +35,6 @@ const updateData = (newData: Array<any>): void => {
 </template>
 
 <style scoped>
-
 .content {
   @apply flex-1 p-8;
 }

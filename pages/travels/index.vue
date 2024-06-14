@@ -35,7 +35,6 @@ const updateData = (newData: Array<any>): void => {
 </template>
 
 <style scoped>
-
 .content {
   @apply flex-1 p-8;
 }

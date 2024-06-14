@@ -2,18 +2,27 @@
 import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
 import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
 import { useRouter } from 'vue-router'
-import { PAYMENT_METHOD_TYPE_1, PAYMENT_METHOD_TYPE_2, PAYMENT_METHOD_TYPE_3 } from '@/constants'
+import {
+  PAYMENT_METHOD_TYPE_1,
+  PAYMENT_METHOD_TYPE_2,
+  PAYMENT_METHOD_TYPE_3,
+} from '@/constants'
 
 const router = useRouter()
 
 const { data: travelsData } = await useFetch('/api/travels')
-const travels = ref(travelsData?.value?.map((travel: any) => ({ id: travel.id, name: travel.name })) || [])
+const travels = ref(
+  travelsData?.value?.map((travel: any) => ({
+    id: travel.id,
+    name: travel.name,
+  })) || [],
+)
 
 const props = defineProps({
   data: {
     type: Array,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const emit = defineEmits(['update:data'])
@@ -31,7 +40,9 @@ const deleteItem = async () => {
     // await $fetch(`/api/bookings/${itemToDelete.value}`, {
     //   method: 'DELETE'
     // })
-    const updatedData = props.data.filter(item => item.id !== itemToDelete.value)
+    const updatedData = props.data.filter(
+      (item) => item.id !== itemToDelete.value,
+    )
     emit('update:data', updatedData)
     showModal.value = false
   } catch (error) {
@@ -48,7 +59,7 @@ const printPaymentType = (paymentMethod: number) => {
     case 1:
       return PAYMENT_METHOD_TYPE_1
     case 2:
-      return PAYMENT_METHOD_TYPE_2 
+      return PAYMENT_METHOD_TYPE_2
     case 3:
       return PAYMENT_METHOD_TYPE_3
     default:
@@ -57,7 +68,7 @@ const printPaymentType = (paymentMethod: number) => {
 }
 
 const printTravelName = (idTravel: number) => {
-  const travel = travels.value.find(travel => travel.id === idTravel)
+  const travel = travels.value.find((travel) => travel.id === idTravel)
   return travel ? travel.name : ''
 }
 </script>
@@ -76,8 +87,12 @@ const printTravelName = (idTravel: number) => {
       </div>
       <div class="data-rows">
         <template v-for="item in props.data" :key="item.id">
-          <div class="data-cell col-span-2">{{ printTravelName(item.idTravel) }}</div>
-          <div class="data-cell col-span-2">{{ printPaymentType(item.paymentMethod) }}</div>
+          <div class="data-cell col-span-2">
+            {{ printTravelName(item.idTravel) }}
+          </div>
+          <div class="data-cell col-span-2">
+            {{ printPaymentType(item.paymentMethod) }}
+          </div>
           <div class="data-cell col-span-6">{{ item.note }}</div>
           <div class="data-cell col-span-2 actions">
             <ButtonCancel @click="confirmDelete(item.id)">DELETE</ButtonCancel>
@@ -86,8 +101,13 @@ const printTravelName = (idTravel: number) => {
       </div>
       <div class="mobile-rows">
         <div v-for="item in props.data" :key="item.id" class="mobile-row">
-          <div><strong>Travel ID:</strong> {{ printTravelName(item.idTravel)}}</div>
-          <div><strong>Payment Method:</strong> {{ printPaymentType(item.paymentMethod) }}</div>
+          <div>
+            <strong>Travel ID:</strong> {{ printTravelName(item.idTravel) }}
+          </div>
+          <div>
+            <strong>Payment Method:</strong>
+            {{ printPaymentType(item.paymentMethod) }}
+          </div>
           <div><strong>Note:</strong> {{ item.note }}</div>
           <div class="flex justify-end mt-2">
             <ButtonCancel @click="confirmDelete(item.id)">DELETE</ButtonCancel>
@@ -97,12 +117,12 @@ const printTravelName = (idTravel: number) => {
     </div>
   </div>
 
-  <ConfirmModal 
-    :visible="showModal" 
-    title="Confirm Delete" 
-    message="Are you sure you want to delete this booking?" 
-    @confirm="deleteItem" 
-    @cancel="cancelDelete" 
+  <ConfirmModal
+    :visible="showModal"
+    title="Confirm Delete"
+    message="Are you sure you want to delete this booking?"
+    @confirm="deleteItem"
+    @cancel="cancelDelete"
   />
 </template>
 
@@ -112,7 +132,7 @@ const printTravelName = (idTravel: number) => {
 }
 
 .header-row {
-  @apply hidden px-4 md:grid grid-cols-12 w-full bg-themeBooking-primary text-themeBooking-background rounded-t-md; 
+  @apply hidden px-4 md:grid grid-cols-12 w-full bg-themeBooking-primary text-themeBooking-background rounded-t-md;
 }
 
 .header-cell {
