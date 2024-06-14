@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Header from '@/components/Header/Header.vue'
-import Step1 from './Step1.vue'
-import Step2 from './Step2.vue'
-import Step3 from './Step3.vue'
+import Step1 from './Step-1.vue'
+import Step2 from './Step-2.vue'
+import Step3 from './Step-3.vue'
 import type { BookingUserType } from '../types'
 
 const step = ref<number>(1)
