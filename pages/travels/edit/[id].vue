@@ -74,6 +74,13 @@ const checkScore = () => {
     travel.value.score = 5
   }
 }
+
+const handleFileUpload = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files.length > 0) {
+    travel.value.picture = target.files[0]
+  }
+}
 </script>
 
 <template>
@@ -100,8 +107,11 @@ const checkScore = () => {
         <FormGroup :for="'description'" :label="'Description'" :error="errors.description">
           <textarea v-model="travel.description" id="description" class="we-input"></textarea>
         </FormGroup>
-        <FormGroup :for="'picture'" :label="'Picture'" :error="errors.picture">
+        <!-- <FormGroup :for="'picture'" :label="'Picture'" :error="errors.picture">
           <input v-model="travel.picture" type="text" id="picture" placeholder="http://" class="we-input">
+        </FormGroup> -->
+        <FormGroup :for="'picture'" :label="'Picture'" :error="errors.picture">
+          <input @change="handleFileUpload" type="file" id="picture" class="we-input">
         </FormGroup>
         <div class="actions">
           <ButtonCancel type="button" @click="cancel" class="mr-4">Cancel</ButtonCancel>
