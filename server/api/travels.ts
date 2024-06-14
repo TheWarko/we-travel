@@ -39,11 +39,11 @@
                 "return": "2024-10-15",
                 "description": "Tokyo is the capital city of Japan and one of its 47 prefectures. The Greater Tokyo Area is the most populous metropolitan area in the world.",
                 "price": 2200,
-                "score": 4.5
+                "score": 5
             },
             {
                 "id": 5,
-                "picture": "https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSBAQChgx8NJtwKwQrVySnLqOb8A4Cax8KZi5x-qftOWJbhbC1Yvc3aAfCS9xzRJzgBsbAYK8TGWc0ndF5y9c0",
+                "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBsh6KVEG4Q0a6nBIT95PWr6B0tPPvGXhfVw&s",
                 "name": "Bangkok",
                 "departure": "2024-11-01",
                 "return": "2024-11-12",
