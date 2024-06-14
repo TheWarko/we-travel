@@ -4,17 +4,17 @@ import { useRouter } from 'vue-router'
 const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   back: {
     type: String,
-    required: false
+    required: false,
   },
   theme: {
     type: String,
     required: false,
-    default: 'themeTravel'
-  }
+    default: 'themeTravel',
+  },
 })
 
 const router = useRouter()
@@ -29,8 +29,8 @@ const goBack = (): void => {
 </script>
 
 <template>
-  <header :class="`header ${props.theme}`">
-    <button v-if="props.back" @click="goBack" class="back-button">Back</button>
+  <header :class="`header ${theme}`">
+    <button v-if="back" @click="goBack" class="back-button">Back</button>
     <h1 class="title">{{ title }}</h1>
   </header>
 </template>

@@ -1,9 +1,8 @@
 <template>
-    <button class="btn-cancel">
-        <slot></slot>
-    </button>
+  <button class="btn-cancel">
+    <slot></slot>
+  </button>
 </template>
-
 
 <style scoped>
 .btn-cancel {

@@ -5,23 +5,23 @@ import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
 import Filters from './Filters.vue'
 import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
 import { useRouter } from 'vue-router'
+import type { TravelType } from '../types'
 
 const router = useRouter()
 
-const props = defineProps({
-  data: {
-    type: Array,
-    required: true
-  }
-})
+const props = defineProps<{
+  data: TravelType[]
+}>()
 
-const emit = defineEmits(['update:data'])
+const emit = defineEmits<{
+  (e: 'update:data', updatedData: TravelType[]): void
+}>()
 
 const filters = ref({
   departure: '',
   return: '',
   price: '',
-  score: ''
+  score: '',
 })
 
 const showModal = ref(false)
@@ -41,7 +41,9 @@ const deleteItem = async () => {
     // await $fetch(`/api/travels/${itemToDelete.value}`, {
     //   method: 'DELETE'
     // })
-    const updatedData = props.data.filter(item => item.id !== itemToDelete.value)
+    const updatedData = props.data.filter(
+      (item) => item.id !== itemToDelete.value,
+    )
     emit('update:data', updatedData)
     showModal.value = false
   } catch (error) {
@@ -54,15 +56,22 @@ const cancelDelete = () => {
 }
 
 const filteredData = computed(() => {
-  return props.data.filter(item => {
-    console.log(filters.value.departure, item.departure)
-    const matchesDeparture = filters.value.departure ? item.departure === filters.value.departure : true
-    const matchesReturn = filters.value.return ? item.return === filters.value.return : true
-    const matchesPrice = filters.value.price ? (
-      filters.value.price === '3000+' ? item.price >= 3000 :
-      item.price >= parseInt(filters.value.price.split('-')[0]) && item.price <= parseInt(filters.value.price.split('-')[1])
-    ) : true
-    const matchesScore = filters.value.score ? item.score >= parseInt(filters.value.score) : true
+  return props.data.filter((item) => {
+    const matchesDeparture = filters.value.departure
+      ? item.departure === filters.value.departure
+      : true
+    const matchesReturn = filters.value.return
+      ? item.return === filters.value.return
+      : true
+    const matchesPrice = filters.value.price
+      ? filters.value.price === '3000+'
+        ? item.price >= 3000
+        : item.price >= parseInt(filters.value.price.split('-')[0]) &&
+          item.price <= parseInt(filters.value.price.split('-')[1])
+      : true
+    const matchesScore = filters.value.score
+      ? item.score >= parseInt(filters.value.score)
+      : true
 
     return matchesDeparture && matchesReturn && matchesPrice && matchesScore
   })
@@ -94,13 +103,15 @@ const updateFilters = (newFilters: typeof filters.value) => {
       <div class="data-rows">
         <template v-for="item in filteredData" :key="item.id">
           <div class="data-cell col-span-2">
-            <img :src="item.picture" :alt="item.name" class="image">
+            <img :src="item.picture" :alt="item.name" class="image" />
           </div>
           <div class="data-cell col-span-2 font-bold">{{ item.name }}</div>
           <div class="data-cell col-span-1">{{ item.departure }}</div>
           <div class="data-cell col-span-1">{{ item.return }}</div>
           <div class="data-cell col-span-3">{{ item.description }}</div>
-          <div class="data-cell col-span-1">{{ item.price.toLocaleString() }}</div>
+          <div class="data-cell col-span-1">
+            {{ item.price.toLocaleString() }}
+          </div>
           <div class="data-cell col-span-1">{{ item.score }}</div>
           <div class="data-cell col-span-1 actions">
             <Button @click="goToEditPage(item.id)" class="mb-2">EDIT</Button>
@@ -110,8 +121,10 @@ const updateFilters = (newFilters: typeof filters.value) => {
       </div>
       <div class="mobile-rows">
         <div v-for="item in filteredData" :key="item.id" class="mobile-row">
-          <div><img :src="item.picture" :alt="item.name" class="image mb-2"></div>
-          <div class="font-bold" ><strong>Name:</strong> {{ item.name }}</div>
+          <div>
+            <img :src="item.picture" :alt="item.name" class="image mb-2" />
+          </div>
+          <div class="font-bold"><strong>Name:</strong> {{ item.name }}</div>
           <div><strong>Departure:</strong> {{ item.departure }}</div>
           <div><strong>Return:</strong> {{ item.return }}</div>
           <div><strong>Description:</strong> {{ item.description }}</div>
@@ -126,12 +139,12 @@ const updateFilters = (newFilters: typeof filters.value) => {
     </div>
   </div>
 
-  <ConfirmModal 
-    :visible="showModal" 
-    title="Confirm Delete" 
-    message="Are you sure you want to delete this travel?" 
-    @confirm="deleteItem" 
-    @cancel="cancelDelete" 
+  <ConfirmModal
+    :visible="showModal"
+    title="Confirm Delete"
+    message="Are you sure you want to delete this travel?"
+    @confirm="deleteItem"
+    @cancel="cancelDelete"
   />
 </template>
 
@@ -141,7 +154,7 @@ const updateFilters = (newFilters: typeof filters.value) => {
 }
 
 .header-row {
-  @apply hidden px-4 md:grid grid-cols-12 w-full bg-themeTravel-primary text-themeTravel-background rounded-t-md; 
+  @apply hidden px-4 md:grid grid-cols-12 w-full bg-themeTravel-primary text-themeTravel-background rounded-t-md;
 }
 
 .header-cell {

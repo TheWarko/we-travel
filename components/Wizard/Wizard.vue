@@ -1,23 +1,28 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 
 const props = defineProps({
   steps: {
     type: Number,
-    required: true
+    required: true,
   },
   currentStep: {
     type: Number,
-    required: true
+    required: true,
   },
   theme: {
     type: String,
     required: false,
-    default: 'themeTravel'
-  }
+    default: 'themeTravel',
+  },
 })
 
-const stepArray = computed(() => Array.from({ length: props.steps }, (_, i) => i + 1))
+const stepArray = computed(() => {
+  const steps = []
+  for (let i = 1; i <= props.steps; i++) {
+    steps.push(i)
+  }
+  return steps
+})
 </script>
 
 <template>
