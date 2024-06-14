@@ -6,6 +6,8 @@ import Filters from './Filters.vue'
 import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
 import { useRouter } from 'vue-router'
 import type { TravelType } from '../types'
+import { formatDate } from '@/helpers/date'
+import { printStars } from '@/helpers/utils'
 
 const router = useRouter()
 
@@ -38,6 +40,8 @@ const confirmDelete = (id: number) => {
 
 const deleteItem = async () => {
   try {
+    // This is a fake delete, in a real application you should call the API and then check the response status 
+    //
     // await $fetch(`/api/travels/${itemToDelete.value}`, {
     //   method: 'DELETE'
     // })
@@ -48,6 +52,9 @@ const deleteItem = async () => {
     showModal.value = false
   } catch (error) {
     console.error('Error deleting item:', error)
+    //
+    // In a real application you should handle the error, log it and show a message to the user
+    //
   }
 }
 
@@ -93,8 +100,7 @@ const updateFilters = (newFilters: typeof filters.value) => {
       <div class="header-row">
         <div class="header-cell col-span-2"></div>
         <div class="header-cell col-span-2">Travel</div>
-        <div class="header-cell col-span-1">Departure</div>
-        <div class="header-cell col-span-1">Return</div>
+        <div class="header-cell col-span-2">Dates</div>
         <div class="header-cell col-span-3">Description</div>
         <div class="header-cell col-span-1">Price</div>
         <div class="header-cell col-span-1">Score</div>
@@ -103,16 +109,39 @@ const updateFilters = (newFilters: typeof filters.value) => {
       <div class="data-rows">
         <template v-for="item in filteredData" :key="item.id">
           <div class="data-cell col-span-2">
-            <img :src="item.picture" :alt="item.name" class="image" />
+            <picture>
+              <source
+                :srcset="`${item.picture}?w=480`"
+                media="(max-width: 480px)"
+              />
+              <source
+                :srcset="`${item.picture}?w=800`"
+                media="(max-width: 800px)"
+              />
+              <source
+                :srcset="`${item.picture}?w=1200`"
+                media="(max-width: 1200px)"
+              />
+              <img :src="item.picture" :alt="item.name" class="image" />
+            </picture>
           </div>
           <div class="data-cell col-span-2 font-bold">{{ item.name }}</div>
-          <div class="data-cell col-span-1">{{ item.departure }}</div>
-          <div class="data-cell col-span-1">{{ item.return }}</div>
+          <div class="data-cell col-span-2">
+            <div>
+              <span class="font-bold">from</span>
+              {{ formatDate(item.departure) }}
+            </div>
+            <div>
+              <span class="font-bold">to</span> {{ formatDate(item.return) }}
+            </div>
+          </div>
           <div class="data-cell col-span-3">{{ item.description }}</div>
           <div class="data-cell col-span-1">
-            {{ item.price.toLocaleString() }}
+            <span class="font-bold">{{ item.price.toLocaleString() }}</span> €
           </div>
-          <div class="data-cell col-span-1">{{ item.score }}</div>
+          <div class="data-cell col-span-1 item-stars">
+            {{ printStars(item.score) }}
+          </div>
           <div class="data-cell col-span-1 actions">
             <Button @click="goToEditPage(item.id)" class="mb-2">EDIT</Button>
             <ButtonCancel @click="confirmDelete(item.id)">DELETE</ButtonCancel>
@@ -122,14 +151,33 @@ const updateFilters = (newFilters: typeof filters.value) => {
       <div class="mobile-rows">
         <div v-for="item in filteredData" :key="item.id" class="mobile-row">
           <div>
-            <img :src="item.picture" :alt="item.name" class="image mb-2" />
+            <picture>
+              <source
+                :srcset="`${item.picture}?w=480`"
+                media="(max-width: 480px)"
+              />
+              <source
+                :srcset="`${item.picture}?w=800`"
+                media="(max-width: 800px)"
+              />
+              <source
+                :srcset="`${item.picture}?w=1200`"
+                media="(max-width: 1200px)"
+              />
+              <img :src="item.picture" :alt="item.name" class="image mb-2" />
+            </picture>
           </div>
-          <div class="font-bold"><strong>Name:</strong> {{ item.name }}</div>
-          <div><strong>Departure:</strong> {{ item.departure }}</div>
-          <div><strong>Return:</strong> {{ item.return }}</div>
-          <div><strong>Description:</strong> {{ item.description }}</div>
-          <div><strong>Price:</strong> {{ item.price }}</div>
-          <div><strong>Score:</strong> {{ item.score }}</div>
+          <div>
+            <strong>{{ item.name }}</strong>
+          </div>
+          <div>{{ item.description }}</div>
+          <div>
+            <p><strong>Dates</strong></p>
+            <span> from</span> {{ formatDate(item.departure) }}
+            <span> to</span> {{ formatDate(item.return) }}
+          </div>
+          <div><strong>Price:</strong> {{ item.price }} €</div>
+          <div class="item-stars">{{ printStars(item.score) }}</div>
           <div class="flex justify-end mt-2">
             <Button @click="goToEditPage(item.id)" class="mr-2">EDIT</Button>
             <ButtonCancel @click="confirmDelete(item.id)">DELETE</ButtonCancel>
@@ -185,7 +233,15 @@ const updateFilters = (newFilters: typeof filters.value) => {
   @apply p-8 border-b border-themeTravel-primary text-themeTravel-text;
 }
 
+.mobile-row > div {
+  @apply mb-4;
+}
+
 .no-results {
   @apply text-center text-themeTravel-text py-8;
+}
+
+.item-stars {
+  @apply text-yellow-500;
 }
 </style>

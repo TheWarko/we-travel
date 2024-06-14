@@ -6,10 +6,12 @@ import Button from '@/components/Buttons/Button.vue'
 import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
 import Header from '@/components/Header/Header.vue'
 import { validateForm } from '@/helpers/form'
+import type { TravelTypeUpload } from '../types'
 
 const route = useRoute()
 const router = useRouter()
 const isEditMode = ref(false)
+const error = ref<any>(null) // Assicurati che sia di tipo `Error | null`
 const travel = ref({
   id: null,
   name: '',
@@ -18,7 +20,7 @@ const travel = ref({
   price: 0,
   score: 0,
   description: '',
-  picture: '',
+  picture: null as File | null,
 })
 const errors = ref({
   name: '',
@@ -31,12 +33,17 @@ const errors = ref({
 })
 
 const fetchTravel = async (id: number) => {
-  const { data } = await useFetch(`/api/travels`)
+  const { data, error: fetchError } =
+    await useFetch<TravelTypeUpload>(`/api/travels`)
   if (Array.isArray(data.value) && data.value !== null) {
     const travelData = data.value.find((travel) => travel.id === id)
     if (travelData) {
       travel.value = travelData
     }
+  }
+  if (fetchError.value) {
+    error.value = error
+    return
   }
 }
 
@@ -50,6 +57,8 @@ onMounted(() => {
 const saveTravel = async () => {
   if (validateForm(travel, errors)) {
     try {
+      // This is a fake submit, in a real application you should call the API and then check the response status 
+      //
       // const result = await $fetch('/api/travels/new', {
       //   method: 'POST',
       //   body: JSON.stringify(travel.value),
@@ -58,9 +67,12 @@ const saveTravel = async () => {
       //   }
       // })
       console.log(travel.value)
-      router.push('/travels')
+      router.push('/travels?success=true')
     } catch (error) {
       console.error('Error adding travel:', error)
+      //
+      // In a real application you should handle the error, log it and show a message to the user
+      //
     }
   }
 }
@@ -86,7 +98,9 @@ const handleFileUpload = (event: Event) => {
 <template>
   <div class="themeTravel-container">
     <Header :title="'Travels'" :back="'/travels'" />
-    <div class="we-content">
+    <ErrorMessage :error="error" />
+
+    <div class="we-content" v-if="!error">
       <h1 class="title">{{ isEditMode ? 'Edit Travel' : 'Add New Travel' }}</h1>
       <form @submit.prevent="saveTravel" class="we-form">
         <FormGroup :for="'name'" :label="'Travel Name'" :error="errors.name">

@@ -19,10 +19,7 @@ const cancel = () => {
 </script>
 
 <template>
-  <div
-    v-if="visible"
-    class="containero"
-  >
+  <div v-if="visible" class="containero">
     <div class="content">
       <h2 class="text-xl font-bold mb-4">{{ title }}</h2>
       <p class="mb-4">{{ message }}</p>
@@ -39,7 +36,7 @@ const cancel = () => {
   @apply fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50;
 }
 
-.content{
+.content {
   @apply bg-white p-6 rounded-lg w-full max-w-md;
 }
 

@@ -13,10 +13,10 @@ const props = defineProps<{
 }>()
 
 const searchQuery = ref('')
-const selectedTravel = ref<{ id: number, name: string }>()
-const travels = ref<{ id: number, name: string }[]>([])
+const selectedTravel = ref<{ id: number; name: string }>()
+const travels = ref<{ id: number; name: string }[]>([])
 
-const { data } = await useFetch<TravelType>('/api/travels')
+const { data, error } = await useFetch<TravelType>('/api/travels')
 travels.value = data.value
 
 const filteredTravels = computed(() =>
@@ -25,14 +25,14 @@ const filteredTravels = computed(() =>
   ),
 )
 
-const selectTravel = (travel: { id: number, name: string }) => {
+const selectTravel = (travel: { id: number; name: string }) => {
   selectedTravel.value = travel
-  const updatedData = { 
-    ...props.data, 
+  const updatedData = {
+    ...props.data,
     booking: {
-      ...props.data.booking, 
-      idTravel: travel.id 
-    }
+      ...props.data.booking,
+      idTravel: travel.id,
+    },
   }
   console.log('updatedData', updatedData)
   emit('update:data', updatedData)
@@ -42,7 +42,9 @@ const selectTravel = (travel: { id: number, name: string }) => {
 
 <template>
   <Wizard :steps="3" :currentStep="1" :theme="'themeBooking'" />
-  <div class="we-content">
+  <ErrorMessage :error="error" />
+
+  <div class="we-content" v-if="!error">
     <h2 class="title">Step 1: Choose the travel</h2>
     <form class="we-form">
       <FormGroup :for="'travel'" :label="'Select Travel'">

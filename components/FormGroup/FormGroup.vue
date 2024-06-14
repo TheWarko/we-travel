@@ -1,18 +1,18 @@
 <script setup lang="ts">
 defineProps({
-    for: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-    error: {
-      type: String,
-      default: '',
-    },
-  })
+  for: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  error: {
+    type: String,
+    default: '',
+  },
+})
 </script>
 
 <template>

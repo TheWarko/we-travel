@@ -38,10 +38,12 @@ const submitForm = async () => {
       },
       user: {
         ...props.data.user,
-      }
+      },
     }
 
     try {
+      // This is a fake submit, in a real application you should call the API and then check the response status
+      //
       // const result = await $fetch('/api/bookings/new', {
       //   method: 'POST',
       // body: JSON.stringify(updatedData),
@@ -50,9 +52,12 @@ const submitForm = async () => {
       // }
       // })
       console.log(updatedData)
-      router.push('/bookings')
+      router.push('/bookings?success=true')
     } catch (error) {
       console.error('Error adding travel:', error)
+      //
+      // In a real application you should handle the error, log it and show a message to the user
+      //
     }
   }
 }

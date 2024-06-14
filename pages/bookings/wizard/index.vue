@@ -6,7 +6,7 @@ import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
 import type { BookingUserType } from '../types'
 
-const step = ref<number>(1);
+const step = ref<number>(1)
 const booking = ref<BookingUserType>({
   booking: {
     id: 0,
@@ -18,8 +18,8 @@ const booking = ref<BookingUserType>({
     name: '',
     email: '',
     phone: '',
-    age: ''
-  }
+    age: '',
+  },
 })
 
 const updateBooking = (newBooking: BookingUserType) => {

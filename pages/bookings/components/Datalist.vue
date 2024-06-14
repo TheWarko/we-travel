@@ -9,7 +9,7 @@ import {
 } from '@/constants'
 import type { BookingType } from '../types'
 
-const { data: travelsData } = await useFetch('/api/travels')
+const { data: travelsData, error } = await useFetch('/api/travels')
 const travels = ref(
   travelsData?.value?.map((travel: any) => ({
     id: travel.id,
@@ -35,7 +35,9 @@ const confirmDelete = (id: number) => {
 
 const deleteItem = async () => {
   try {
-    // await $fetch(`/api/bookings/${itemToDelete.value}`, {
+    // This is a fake delete, in a real application you should call the API and then check the response status
+    //
+    // const res = await $fetch(`/api/bookings/${itemToDelete.value}`, {
     //   method: 'DELETE'
     // })
     const updatedData = props.data.filter(
@@ -45,6 +47,9 @@ const deleteItem = async () => {
     showModal.value = false
   } catch (error) {
     console.error('Error deleting item:', error)
+    //
+    // In a real application you should handle the error, log it and show a message to the user
+    //
   }
 }
 
@@ -72,7 +77,9 @@ const printTravelName = (idTravel: number) => {
 </script>
 
 <template>
-  <div class="datalist-container">
+  <ErrorMessage :error="error" />
+
+  <div class="datalist-container" v-if="!error">
     <div v-if="props.data.length === 0" class="no-results">
       No results, try with different filters.
     </div>
