@@ -7,6 +7,6 @@
 
 <style scoped>
 .btn-cancel {
-  @apply bg-gray-200 hover:bg-gray-300 text-themeTravel-primary font-bold py-2 px-4 rounded-lg;
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-500 font-bold py-2 px-4 rounded-lg;
 }
 </style>

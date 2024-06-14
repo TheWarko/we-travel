@@ -55,8 +55,9 @@ const cancelDelete = () => {
 
 const filteredData = computed(() => {
   return props.data.filter(item => {
-    const matchesDeparture = filters.value.departure ? item.departure >= filters.value.departure : true
-    const matchesReturn = filters.value.return ? item.return >= filters.value.return : true
+    console.log(filters.value.departure, item.departure)
+    const matchesDeparture = filters.value.departure ? item.departure === filters.value.departure : true
+    const matchesReturn = filters.value.return ? item.return === filters.value.return : true
     const matchesPrice = filters.value.price ? (
       filters.value.price === '3000+' ? item.price >= 3000 :
       item.price >= parseInt(filters.value.price.split('-')[0]) && item.price <= parseInt(filters.value.price.split('-')[1])
@@ -99,7 +100,7 @@ const updateFilters = (newFilters: typeof filters.value) => {
           <div class="data-cell col-span-1">{{ item.departure }}</div>
           <div class="data-cell col-span-1">{{ item.return }}</div>
           <div class="data-cell col-span-3">{{ item.description }}</div>
-          <div class="data-cell col-span-1">{{ item.price }}</div>
+          <div class="data-cell col-span-1">{{ item.price.toLocaleString() }}</div>
           <div class="data-cell col-span-1">{{ item.score }}</div>
           <div class="data-cell col-span-1 actions">
             <Button @click="goToEditPage(item.id)" class="mb-2">EDIT</Button>
