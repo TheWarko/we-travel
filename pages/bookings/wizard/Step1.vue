@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import Wizard from '@/components/Wizard/Wizard.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
+import type { BookingUserType } from '../types'
+import type { TravelType } from '../../travels/types'
 
-const emit = defineEmits(['update:data', 'update:step'])
-const props = defineProps({
-  data: {
-    type: Object,
-    required: true,
-  },
-})
+const emit = defineEmits<{
+  (e: 'update:data', updatedData: BookingUserType): void
+  (e: 'update:step', step: number): void
+}>()
+const props = defineProps<{
+  data: BookingUserType
+}>()
 
 const searchQuery = ref('')
-const selectedTravel = ref(null)
-const travels = ref([])
+const selectedTravel = ref<{ id: number, name: string }>()
+const travels = ref<{ id: number, name: string }[]>([])
 
-const { data } = await useFetch('/api/travels')
+const { data } = await useFetch<TravelType>('/api/travels')
 travels.value = data.value
 
 const filteredTravels = computed(() =>
@@ -23,9 +25,16 @@ const filteredTravels = computed(() =>
   ),
 )
 
-const selectTravel = (travel) => {
+const selectTravel = (travel: { id: number, name: string }) => {
   selectedTravel.value = travel
-  const updatedData = { ...props.data, idTravel: travel.id }
+  const updatedData = { 
+    ...props.data, 
+    booking: {
+      ...props.data.booking, 
+      idTravel: travel.id 
+    }
+  }
+  console.log('updatedData', updatedData)
   emit('update:data', updatedData)
   emit('update:step', 2)
 }

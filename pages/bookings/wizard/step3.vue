@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Wizard from '@/components/Wizard/Wizard.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
 import Button from '@/components/Buttons/Button.vue'
@@ -8,15 +10,13 @@ import {
   PAYMENT_METHOD_TYPE_2,
   PAYMENT_METHOD_TYPE_3,
 } from '@/constants'
+import type { BookingUserType } from '../types'
 
 const router = useRouter()
 
-const props = defineProps({
-  data: {
-    type: Object,
-    required: true,
-  },
-})
+const props = defineProps<{
+  data: BookingUserType
+}>()
 
 const paymentInfo = ref({
   paymentMethod: '',
@@ -27,23 +27,30 @@ const errors = ref({
   paymentMethod: '',
 })
 
-const submitForm = () => {
+const submitForm = async () => {
   if (validateForm(paymentInfo, errors)) {
     const updatedData = {
       ...props.data,
-      paymentMethod: paymentInfo.value.paymentMethod,
-      note: paymentInfo.value.note,
+      booking: {
+        ...props.data.booking,
+        paymentMethod: paymentInfo.value.paymentMethod,
+        note: paymentInfo.value.note,
+      },
+      user: {
+        ...props.data.user,
+      }
     }
 
     try {
       // const result = await $fetch('/api/bookings/new', {
       //   method: 'POST',
-      //   body: {
-      //     ...travel.value
-      //   }
+      // body: JSON.stringify(updatedData),
+      // headers: {
+      //   'Content-Type': 'application/json'
+      // }
       // })
-      router.push('/bookings')
       console.log(updatedData)
+      router.push('/bookings')
     } catch (error) {
       console.error('Error adding travel:', error)
     }
@@ -68,8 +75,8 @@ const submitForm = () => {
         >
           <option value="">Select Payment Method</option>
           <option value="1">{{ PAYMENT_METHOD_TYPE_1 }}</option>
-          <option value="paypal">{{ PAYMENT_METHOD_TYPE_2 }}</option>
-          <option value="revolut">{{ PAYMENT_METHOD_TYPE_3 }}</option>
+          <option value="2">{{ PAYMENT_METHOD_TYPE_2 }}</option>
+          <option value="3">{{ PAYMENT_METHOD_TYPE_3 }}</option>
         </select>
       </FormGroup>
       <FormGroup :for="'note'" :label="'Note (Optional)'">

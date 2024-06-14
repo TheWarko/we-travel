@@ -29,8 +29,8 @@ const goBack = (): void => {
 </script>
 
 <template>
-  <header :class="`header ${props.theme}`">
-    <button v-if="props.back" @click="goBack" class="back-button">Back</button>
+  <header :class="`header ${theme}`">
+    <button v-if="back" @click="goBack" class="back-button">Back</button>
     <h1 class="title">{{ title }}</h1>
   </header>
 </template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 
 const props = defineProps({
   steps: {
@@ -17,9 +16,13 @@ const props = defineProps({
   },
 })
 
-const stepArray = computed(() =>
-  Array.from({ length: props.steps }, (_, i) => i + 1),
-)
+const stepArray = computed(() => {
+  const steps = []
+  for (let i = 1; i <= props.steps; i++) {
+    steps.push(i)
+  }
+  return steps
+})
 </script>
 
 <template>

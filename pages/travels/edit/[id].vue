@@ -52,8 +52,9 @@ const saveTravel = async () => {
     try {
       // const result = await $fetch('/api/travels/new', {
       //   method: 'POST',
-      //   body: {
-      //     ...travel.value
+      //   body: JSON.stringify(travel.value),
+      //   headers: {
+      //     'Content-Type': 'application/json'
       //   }
       // })
       console.log(travel.value)

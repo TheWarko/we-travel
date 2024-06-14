@@ -8,12 +8,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  name: 'HomePage',
-})
-</script>
-
 <style scoped>
 .containero {
   @apply min-h-screen flex flex-col items-center justify-center bg-themeTravel-background;

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Wizard from '@/components/Wizard/Wizard.vue'
 import FormGroup from '@/components/FormGroup/FormGroup.vue'
 import Button from '@/components/Buttons/Button.vue'
@@ -8,29 +9,29 @@ import {
   isValidPhone,
   isValidAge,
 } from '@/helpers/form'
+import type { BookingUserType, UserType } from '../types'
 
-const emit = defineEmits(['update:data', 'update:step'])
-const props = defineProps({
-  data: {
-    type: Object,
-    required: true,
-  },
-})
+const emit = defineEmits<{
+  (e: 'update:data', updatedData: BookingUserType): void
+  (e: 'update:step', newStep: number): void
+}>()
 
-const user = ref({
+const props = defineProps<{
+  data: BookingUserType
+}>()
+
+const user = ref<UserType>({
   name: '',
   email: '',
   phone: '',
   age: '',
-  gender: '',
 })
 
-const errors = ref({
+const errors = ref<Record<keyof UserType, string>>({
   name: '',
   email: '',
   phone: '',
   age: '',
-  gender: '',
 })
 
 const onChangeEmail = () => {
@@ -64,7 +65,7 @@ const onChangeAge = () => {
   }
 }
 
-const validateThisForm = (datas, errors) => {
+const validateThisForm = (datas: typeof user, errors: typeof errors) => {
   let valid = validateForm(datas, errors)
 
   if (!onChangeEmail()) {
@@ -86,6 +87,7 @@ const validateThisForm = (datas, errors) => {
 const submitForm = () => {
   if (validateThisForm(user, errors)) {
     const updatedData = { ...props.data, user: user.value }
+    console.log('updatedData', updatedData)
     emit('update:data', updatedData)
     emit('update:step', 3)
   }

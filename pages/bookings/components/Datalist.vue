@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
 import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
-import { useRouter } from 'vue-router'
 import {
   PAYMENT_METHOD_TYPE_1,
   PAYMENT_METHOD_TYPE_2,
   PAYMENT_METHOD_TYPE_3,
 } from '@/constants'
-
-const router = useRouter()
+import type { BookingType } from '../types'
 
 const { data: travelsData } = await useFetch('/api/travels')
 const travels = ref(
@@ -18,14 +17,13 @@ const travels = ref(
   })) || [],
 )
 
-const props = defineProps({
-  data: {
-    type: Array,
-    required: true,
-  },
-})
+const props = defineProps<{
+  data: BookingType[]
+}>()
 
-const emit = defineEmits(['update:data'])
+const emit = defineEmits<{
+  (e: 'update:data', updatedData: BookingType[]): void
+}>()
 
 const showModal = ref(false)
 const itemToDelete = ref<number | null>(null)

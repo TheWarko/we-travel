@@ -1,26 +1,32 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Header from '@/components/Header/Header.vue'
 import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
+import type { BookingUserType } from '../types'
 
-const step = ref(1)
-const booking = ref({
-  idTravel: 0,
+const step = ref<number>(1);
+const booking = ref<BookingUserType>({
+  booking: {
+    id: 0,
+    idTravel: 0,
+    paymentMethod: 0,
+    note: '',
+  },
   user: {
     name: '',
     email: '',
     phone: '',
-    age: '',
-  },
-  paymentMethod: '',
-  note: '',
+    age: ''
+  }
 })
 
-const updateBooking = (newBooking) => {
+const updateBooking = (newBooking: BookingUserType) => {
   booking.value = newBooking
 }
-const updateStep = (newStep) => {
+
+const updateStep = (newStep: number) => {
   step.value = newStep
 }
 </script>

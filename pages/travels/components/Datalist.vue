@@ -5,17 +5,17 @@ import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
 import Filters from './Filters.vue'
 import ConfirmModal from '@/components/Modals/ConfirmModal.vue'
 import { useRouter } from 'vue-router'
+import type { TravelType } from '../types'
 
 const router = useRouter()
 
-const props = defineProps({
-  data: {
-    type: Array,
-    required: true,
-  },
-})
+const props = defineProps<{
+  data: TravelType[]
+}>()
 
-const emit = defineEmits(['update:data'])
+const emit = defineEmits<{
+  (e: 'update:data', updatedData: TravelType[]): void
+}>()
 
 const filters = ref({
   departure: '',
@@ -57,7 +57,6 @@ const cancelDelete = () => {
 
 const filteredData = computed(() => {
   return props.data.filter((item) => {
-    console.log(filters.value.departure, item.departure)
     const matchesDeparture = filters.value.departure
       ? item.departure === filters.value.departure
       : true

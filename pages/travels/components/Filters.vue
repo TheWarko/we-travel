@@ -1,3 +1,32 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import FormGroup from '@/components/FormGroup/FormGroup.vue'
+import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
+
+const filters = ref({
+  departure: '',
+  return: '',
+  price: '',
+  score: '',
+})
+
+const emit = defineEmits(['update:filters'])
+
+const updateFilters = () => {
+  emit('update:filters', { ...filters.value })
+}
+
+const resetFilters = () => {
+  filters.value = {
+    departure: '',
+    return: '',
+    price: '',
+    score: '',
+  }
+  updateFilters()
+}
+</script>
+
 <template>
   <div class="filters">
     <div class="grid md:grid-cols-4 gap-4">
@@ -54,35 +83,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import FormGroup from '@/components/FormGroup/FormGroup.vue'
-import ButtonCancel from '@/components/Buttons/ButtonCancel.vue'
-
-const filters = ref({
-  departure: '',
-  return: '',
-  price: '',
-  score: '',
-})
-
-const emit = defineEmits(['update:filters'])
-
-const updateFilters = () => {
-  emit('update:filters', { ...filters.value })
-}
-
-const resetFilters = () => {
-  filters.value = {
-    departure: '',
-    return: '',
-    price: '',
-    score: '',
-  }
-  updateFilters()
-}
-</script>
 
 <style scoped>
 .filters {

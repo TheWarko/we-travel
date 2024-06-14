@@ -1,5 +1,5 @@
-<script setup>
-const props = defineProps({
+<script setup lang="ts">
+defineProps({
   theme: {
     type: String,
     required: false,
@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <button :class="`btn ${props.theme}`">
+  <button :class="`btn ${theme}`">
     <slot></slot>
   </button>
 </template>

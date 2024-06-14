@@ -4,17 +4,18 @@ import Datalist from './components/Datalist.vue'
 import Button from '@/components/Buttons/Button.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import type { TravelType } from './types'
 
 const router = useRouter()
 
-const { data } = await useFetch('/api/travels')
-const travels = ref(data.value)
+const { data } = await useFetch<TravelType[]>('/api/travels')
+const travels = ref<TravelType[]>(data.value || [])
 
 const goToEditPage = (): void => {
   router.push('/travels/edit/0')
 }
 
-const updateData = (newData: Array<any>): void => {
+const updateData = (newData: TravelType[]): void => {
   travels.value = newData
 }
 </script>
