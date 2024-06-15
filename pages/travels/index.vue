@@ -37,7 +37,7 @@ onMounted(() => {
       <ErrorMessage :error="error" />
       <ToastSuccess
         ref="successToast"
-        message="New travel has been successfully created."
+        message="The travel has been successfully edited."
       />
 
       <div class="content" v-if="!error">
