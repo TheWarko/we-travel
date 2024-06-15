@@ -37,7 +37,7 @@ const cancel = () => {
 }
 
 .content {
-  @apply bg-white p-6 rounded-lg w-full max-w-md;
+  @apply bg-white p-6 rounded-lg w-full max-w-md ml-4 mr-4;
 }
 
 .btn-confirm {

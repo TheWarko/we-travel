@@ -33,7 +33,7 @@ defineExpose({
 
 <style scoped>
 .toast {
-  @apply fixed top-4 right-8 bg-green-500 text-white p-8 rounded shadow-lg flex items-center text-lg;
+  @apply fixed bg-green-500 text-white p-8 rounded shadow-lg flex items-center text-lg ml-4 mr-4 top-4;
 }
 .close-button {
   @apply ml-4 text-white font-bold text-lg;

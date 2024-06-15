@@ -22,6 +22,6 @@
 }
 
 .box {
-  @apply w-64 h-64 flex items-center justify-center bg-themeTravel-primary text-themeTravel-background shadow-lg rounded-lg text-xl font-semibold text-center hover:bg-themeTravel-secondary;
+  @apply w-64 h-32 flex items-center justify-center bg-themeTravel-primary text-themeTravel-background shadow-lg rounded-lg text-xl font-semibold text-center hover:bg-themeTravel-secondary;
 }
 </style>
